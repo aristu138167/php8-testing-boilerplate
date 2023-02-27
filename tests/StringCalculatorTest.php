@@ -9,27 +9,31 @@ use PHPUnit\Framework\TestCase;
 
 final class StringCalculatorTest extends TestCase
 {
+    private StringCalculator $stringCalculator;
+    protected function setUp():void
+    {
+        parent::setUp();
+        $this-> stringCalculator = new StringCalculator();
+
+    }
+
     /**
      * @test
      */
     public function returns0forEmpty()
     {
-        $stringcalculator = new StringCalculator();
+        $result = $this -> stringCalculator->add("");
 
-        $result = $stringcalculator->add("");
-
-        $this->assertEquals(0, $result);
+        $this->assertEquals(0,$result);
     }
     /**
      * @test
      */
     public function returns1for1number()
     {
-        $stringcalculator = new StringCalculator();
+        $result = $this -> stringCalculator->add("1");
 
-        $result = $stringcalculator->add("1");
-
-        $this->assertEquals(1, $result);
+        $this->assertEquals(1,$result);
     }
 
     /**
@@ -37,11 +41,9 @@ final class StringCalculatorTest extends TestCase
      */
     public function returns2for2numbers()
     {
-        $stringcalculator = new StringCalculator();
+        $result = $this -> stringCalculator->add("1,1");
 
-        $result = $stringcalculator->add("1,1");
-
-        $this->assertEquals(2, $result);
+        $this->assertEquals(2,$result);
     }
 
     /**
@@ -49,21 +51,18 @@ final class StringCalculatorTest extends TestCase
      */
     public function returns10for5numbers()
     {
-        $stringcalculator = new StringCalculator();
+        $result = $this -> stringCalculator->add("1,1,2,4,2");
 
-        $result = $stringcalculator->add("1,1,2,4,2");
-
-        $this->assertEquals(10, $result);
+        $this->assertEquals(10,$result);
     }
     /**
      * @test
      */
     public function returns6for3numbersWithLineJump()
     {
-        $stringcalculator = new StringCalculator();
+        $result = $this -> stringCalculator->add("1/n2,3");
 
-        $result = $stringcalculator->add("1/n2,3");
+        $this->assertEquals(6,$result);
 
-        $this->assertEquals(10, $result);
     }
 }
